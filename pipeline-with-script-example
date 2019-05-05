@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    tools {
+        jdk "jdk-12.0.1"
+    }
+    
+  
+                
+    stages{
+        stage('Build'){
+            steps{
+                script {
+                    def browsers = ["chrome", "ie", "360"]
+                    for( int i = 0; i < browsers.size(); ++i) {
+                        echo "Testing the ${browsers[i]} browsers"
+                    }
+                    
+                }
+               
+            }
+        }
+    }
+}
