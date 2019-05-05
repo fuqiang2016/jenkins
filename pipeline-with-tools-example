@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    tools {
+        jdk "jdk-12.0.1" #可带入系统变量，可在printenv中查看
+    }
+    
+    stages{
+        stage('Build'){
+            steps{
+                sh "printenv"
+            }
+        }
+    }
+}
