@@ -1,0 +1,39 @@
+//布尔值参数
+pipeline{
+    agent any
+    parameters {
+        booleanParam(defaultValue: true, description: '', name: 'userFlag')
+    }
+    stages{
+        stage("foo"){
+            steps{
+                echo "flag: ${params.userFlag}"
+            }
+        }
+    }
+}
+
+//选项参数
+选项参数:type
+值:dev\prod
+
+pipeline {
+    agent any
+    
+    stages {
+        stage("options"){
+            steps{
+                script{
+                    if (params.type == "dev"){
+                        echo "deploy to dev"
+                    }
+                    if (params.type == "prod"){
+                        echo "deploy to prod"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
