@@ -1,0 +1,36 @@
+pipeline {
+  agent any
+  
+  stages{
+    stage("example"){
+      steps{
+        echo "${env.BUILD_BUMBER} on ${JENKINS_URL}"
+      }
+    }
+  }
+}
+
+BUILD_BUMBER:构建号
+BRANCH_NAME:多分支，根据不同分支做不同的事情，比如通过代码将release分支发布到生产环境中、master分支发布到测试环境中
+BUILD_URL:当前构建的页面URL
+GIT_BRANCH:通过git接取的源码构建的项目才会有此变量
+
+
+pipeline {
+    agent any
+    environment {
+        name = "fuqiang"
+    }
+    //kind
+    stages {
+        stage("test"){
+                environment {
+                    DEBUG_FLAGS = "--g"
+                }
+            steps{
+                echo "${name} ${DEBUG_FLAGS}"
+                sh "printenv"
+            }
+        }
+    }
+}
