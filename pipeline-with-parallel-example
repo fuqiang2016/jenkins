@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("并行构建"){
+            steps {
+                parallel(
+                    jdk8: {
+                        echo "jdk8 build"
+                    },
+                    jdk9: {
+                        echo "jdk9 build"
+                    }
+                    )
+            }
+        }
+    }
+}
