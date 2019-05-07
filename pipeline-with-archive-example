@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    
+    toos {
+        maven "mvn-3.5.4"
+    }
+    
+    stages{
+        stage("build"){
+            steps{
+                sh "mv clean sprint-boot:repackage"
+            }
+        }
+    }
+    //归档
+    post {
+        always{
+            archiveArtifacts artifacts: "target/**/*.jar"
+        }
+    }
+}
