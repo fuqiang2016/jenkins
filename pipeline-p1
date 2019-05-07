@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('get code from git'){
+            //拉代码
+            steps{
+                sh "git pull https://github.com/fuqiang2016/jenkins.git"
+            }
+        }
+        stage("calc files count"){
+            steps{
+                script {
+                    def counts = sh 'find . -name "pipeline*" | wc -l'
+                }
+            }
+            post {
+                success {
+                    //when success to backup
+                    archiveArtifacts artifacts: 'pipeline*'
+                    }
+                }
+            }
+        }
+    }
+
